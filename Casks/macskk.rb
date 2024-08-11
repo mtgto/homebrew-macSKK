@@ -14,7 +14,12 @@ cask "macskk" do
 
   depends_on macos: ">= :ventura"
 
-  pkg "macSKK-#{version}.pkg"
+  # use installer command becasuse pkg command always requires sudo even if destination is user home directory.
+  # pkg "macSKK-#{version}.pkg"
+  installer script: {
+    executable: "/usr/sbin/installer",
+    args: ["-pkg", "#{staged_path}/macSKK-#{version}.pkg", "-target", "CurrentUserHomeDirectory"]
+  }
 
   zap trash: [
     "~/Library/Containers/net.mtgto.inputmethod.macSKK",
