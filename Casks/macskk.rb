@@ -12,7 +12,7 @@ cask "macskk" do
     strategy :github_latest
   end
 
-  depends_on macos: ">= :ventura"
+  depends_on macos: ">= 13.3"
 
   # use installer command becasuse pkg command always requires sudo even if destination is user home directory.
   # pkg "macSKK-#{version}.pkg"
