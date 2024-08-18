@@ -19,8 +19,8 @@ jobs:
           sparse-checkout: Casks
       - name: Modify a Cask
         run: |
-          gsed --in-place --regexp-extended 's/version "[0-9]+\.[0-9]+\.[0-9]+"/version: "${{ github.event.inputs.version }}"/' Casks/macskk.rb
-          gsed --in-place --regexp-extended 's/sha256 "[0-9a-f]{64}"/sha256: "${{ github.event.inputs.sha256 }}"/' Casks/macskk.rb
+          sed --in-place --regexp-extended 's/version "[0-9]+\.[0-9]+\.[0-9]+"/version: "${{ github.event.inputs.version }}"/' Casks/macskk.rb
+          sed --in-place --regexp-extended 's/sha256 "[0-9a-f]{64}"/sha256: "${{ github.event.inputs.sha256 }}"/' Casks/macskk.rb
       - name: Commit & Push
         run: |
           git diff --exit-code --quiet
