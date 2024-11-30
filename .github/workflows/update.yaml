@@ -13,11 +13,12 @@ jobs:
         run: |
           sed --in-place --regexp-extended 's/version "[0-9]+\.[0-9]+\.[0-9]+"/version "${{ github.event.client_payload.version }}"/; s/sha256 "[0-9a-f]{64}"/sha256 "${{ github.event.client_payload.sha256 }}"/' Casks/macskk.rb
       - name: Commit & Push
+        # https://github.com/actions/checkout/blob/main/README.md#push-a-commit-using-the-built-in-token
         run: |
           if [ -n "$(git diff --name-only Casks/macskk.rb)" ]; then
             git add --update
-            git config user.name github-actions
-            git config user.email github-actions@github.com
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git commit -m "Update Cask for version ${{ github.event.client_payload.version }}"
             git push
           fi
